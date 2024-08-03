@@ -1,8 +1,9 @@
 import React from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
+import Resume from "./components/Resume";
 import Login from "./pages/Login";
-import SignIn from "./pages/SignIn";
+import SignUp from "./pages/SignUp";
 function App() {
   return (
     <>
@@ -10,9 +11,9 @@ function App() {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route index element={<Home />} />
-
+          <Route path="/Resume" element={<Resume />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/signin" element={<SignIn />} />
+          <Route path="/SignUp" element={<SignUp />} />
         </Routes>
       </BrowserRouter>
     </>

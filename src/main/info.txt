@@ -2,3 +2,56 @@ git pull origin main
 git add .
 git commit -m "Resolved merge conflicts"
 git push origin main
+
+
+Project Planning
+Features
+User Input: Users can input their travel details.
+Route Details: Show all tourist places between Nanded and Pune.
+Hotel Details: Show hotel details in Pune and nearby areas.
+Itinerary Generation: Generate and display the itinerary.
+PDF Download: Allow users to download the itinerary as a PDF.
+
+Technologies
+Frontend: HTML, CSS, Bootstrap, React.js
+Backend: Node.js, Express.js
+Database: MongoDB
+PDF Generation: Libraries like jspdf or pdf-lib
+API Integration: Fetch details from public APIs or your own database
+
+Project Structure
+
+Frontend
+Home Page: User inputs travel details (Nanded to Pune).
+Route Page: Display tourist places between Nanded and Pune.
+Hotel Page: Display hotel details in Pune.
+Itinerary Page: Generate and show itinerary with download option.
+
+Backend
+API Endpoints: Fetch tourist places and hotel details.
+PDF Generation: Generate PDF of the itinerary.
+
+
+
+
+
+
+
+
+
+Set Up React Components:
+
+Home.js: Input travel details.
+Route.js: Display tourist places.
+Hotels.js: Display hotel details.
+Itinerary.js: Generate and show itinerary with download option.
+
+
+Useful References and Resources
+React Documentation: https://reactjs.org/docs/getting-started.html
+Redux Documentation: https://redux.js.org/
+React Router Documentation: https://reactrouter.com/
+Styled-components Documentation: https://styled-components.com/docs
+Express.js Documentation: https://expressjs.com/
+MongoDB Documentation: https://docs.mongodb.com/
+jsPDF Documentation: https://parall.ax/products/jspdf

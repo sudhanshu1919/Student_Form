@@ -13,24 +13,12 @@ function Navbar({ login }) {
             <StyledLink to="/home">Home</StyledLink>
           </div>
           <div>
-            <StyledLink to="/about">About</StyledLink>
-          </div>
-          <div>
-            <StyledLink to="/about">About</StyledLink>
-          </div>
-          <div>
-            <StyledLink to="/about">About</StyledLink>
-          </div>
-          <div>
-            <StyledLink to="/about">About</StyledLink>
-          </div>
-          <div>
-            <StyledLink to="/about">About</StyledLink>
+            <StyledLink to="/Resume">Cretae Resume</StyledLink>
           </div>
         </Menu>
       ) : (
         <Btn>
-          <button onClick={() => navigate(login ? "/login" : "/signup")}>
+          <button onClick={() => navigate(login ? "/login" : "/SignUp")}>
             {login ? "Login" : "Create Account"}
           </button>
         </Btn>
@@ -61,10 +49,11 @@ const StyledLink = styled(Link)`
   color: white;
   text-decoration: none;
   margin-left: 30px;
-  font-family: "Dosis", sans-serif;
+  font-family: "Noto Sans", sans-serif;
   font-optical-sizing: auto;
   font-weight: <weight>;
   font-style: normal;
+  font-variation-settings: "wdth" 100;
 `;
 
 export default Navbar;
