@@ -4,7 +4,6 @@ import Home from "./Home";
 import { createContext } from "react";
 // We have Create Context
 export const UserContext = createContext();
-
 function App() {
   const [stuName, setStuName] = useState({
     name: "Bowie Alderney Sofa",
