@@ -1,7 +1,9 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./main/App";
+// import App from "./main/App";
 // import App from "./ContaxtAPI/App";
+
+import App from "./Redux/App";
 import reportWebVitals from "./reportWebVitals";
 // it is Boostrap
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
