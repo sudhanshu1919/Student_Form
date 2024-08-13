@@ -1,7 +1,11 @@
 import React from "react";
 
 function Alldata() {
-  return <div>Alldata</div>;
+  return (
+    <>
+      <h4>UsState</h4>
+    </>
+  );
 }
 
 export default Alldata;
