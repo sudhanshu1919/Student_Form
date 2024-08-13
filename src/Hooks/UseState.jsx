@@ -1,17 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 
 function UseState() {
+  const [counter, setCounter] = useState(0);
+
+  const increment = () => {
+    setCounter(counter + 1);
+  };
+
+  const dencrement = () => {
+    if (counter > 0) {
+      setCounter(counter - 1);
+    }
+  };
+
   return (
     <>
-      <Conatiner>
+      <Container>
         <h2>UseState</h2>
-      </Conatiner>
+        <button onClick={increment}>+ Increment</button>
+        <h3>{counter}</h3>
+        <button onClick={dencrement}>- Decrement</button>
+      </Container>
     </>
   );
 }
 
-const Conatiner = styled.div`
+const Container = styled.div`
   text-align: center;
   margin-top: 100px;
 `;
