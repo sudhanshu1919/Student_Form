@@ -2,6 +2,76 @@ import React, { useState } from "react";
 import styled from "styled-components";
 import servicesData from "./servicesData.json";
 
+const ServicesComponent = () => {
+  const [serviceType, setServiceType] = useState("HomeServices");
+  const [selectedService, setSelectedService] = useState(null);
+
+  const filteredServices = servicesData.services[serviceType] || [];
+
+  return (
+    <MainContainer>
+      {/* Button Row */}
+      <ButtonContainer>
+        <Button onClick={() => setServiceType("HomeServices")}>
+          Home Services
+        </Button>
+        <Button onClick={() => setServiceType("OnlineServices")}>
+          Online Services
+        </Button>
+      </ButtonContainer>
+
+      {/* Display Service Details if a service is selected */}
+      {selectedService ? (
+        <DetailsContainer>
+          <ServiceImage
+            src={selectedService.image}
+            alt={selectedService.serviceName}
+          />
+          <ServiceTitle>{selectedService.serviceName}</ServiceTitle>
+          <ServiceInfo>
+            <strong>Provider:</strong> {selectedService.provider.shopName}
+          </ServiceInfo>
+          <ServiceInfo>
+            <strong>Owner:</strong> {selectedService.provider.ownerName}
+          </ServiceInfo>
+          <ServiceInfo>
+            <strong>Address:</strong> {selectedService.provider.address}
+          </ServiceInfo>
+          <ServiceInfo>
+            <strong>Contact:</strong> {selectedService.provider.contact}
+          </ServiceInfo>
+          <ServiceInfo>
+            <strong>Price:</strong> {selectedService.price}
+          </ServiceInfo>
+          <ServiceInfo>
+            <strong>Description:</strong> {selectedService.description}
+          </ServiceInfo>
+          <DetailsButton onClick={() => setSelectedService(null)}>
+            Back to Services
+          </DetailsButton>
+        </DetailsContainer>
+      ) : (
+        <CardContainer>
+          {filteredServices.map((service) => (
+            <ServiceCard
+              key={service.id}
+              onClick={() => setSelectedService(service)}
+            >
+              <ServiceImage src={service.image} alt={service.serviceName} />
+              <ServiceTitle>{service.serviceName}</ServiceTitle>
+              <ServiceInfo>
+                <strong>Provider:</strong> {service.provider.shopName}
+              </ServiceInfo>
+              <ServiceInfo>
+                <strong>Price:</strong> {service.price}
+              </ServiceInfo>
+            </ServiceCard>
+          ))}
+        </CardContainer>
+      )}
+    </MainContainer>
+  );
+};
 const MainContainer = styled.div`
   display: grid;
   grid-template-rows: auto 1fr;
@@ -83,76 +153,4 @@ const DetailsButton = styled.button`
     background-color: #0056b3;
   }
 `;
-
-const ServicesComponent = () => {
-  const [serviceType, setServiceType] = useState("HomeServices");
-  const [selectedService, setSelectedService] = useState(null);
-
-  const filteredServices = servicesData.services[serviceType] || [];
-
-  return (
-    <MainContainer>
-      {/* Button Row */}
-      <ButtonContainer>
-        <Button onClick={() => setServiceType("HomeServices")}>
-          Home Services
-        </Button>
-        <Button onClick={() => setServiceType("OnlineServices")}>
-          Online Services
-        </Button>
-      </ButtonContainer>
-
-      {/* Display Service Details if a service is selected */}
-      {selectedService ? (
-        <DetailsContainer>
-          <ServiceImage
-            src={selectedService.image}
-            alt={selectedService.serviceName}
-          />
-          <ServiceTitle>{selectedService.serviceName}</ServiceTitle>
-          <ServiceInfo>
-            <strong>Provider:</strong> {selectedService.provider.shopName}
-          </ServiceInfo>
-          <ServiceInfo>
-            <strong>Owner:</strong> {selectedService.provider.ownerName}
-          </ServiceInfo>
-          <ServiceInfo>
-            <strong>Address:</strong> {selectedService.provider.address}
-          </ServiceInfo>
-          <ServiceInfo>
-            <strong>Contact:</strong> {selectedService.provider.contact}
-          </ServiceInfo>
-          <ServiceInfo>
-            <strong>Price:</strong> {selectedService.price}
-          </ServiceInfo>
-          <ServiceInfo>
-            <strong>Description:</strong> {selectedService.description}
-          </ServiceInfo>
-          <DetailsButton onClick={() => setSelectedService(null)}>
-            Back to Services
-          </DetailsButton>
-        </DetailsContainer>
-      ) : (
-        <CardContainer>
-          {filteredServices.map((service) => (
-            <ServiceCard
-              key={service.id}
-              onClick={() => setSelectedService(service)}
-            >
-              <ServiceImage src={service.image} alt={service.serviceName} />
-              <ServiceTitle>{service.serviceName}</ServiceTitle>
-              <ServiceInfo>
-                <strong>Provider:</strong> {service.provider.shopName}
-              </ServiceInfo>
-              <ServiceInfo>
-                <strong>Price:</strong> {service.price}
-              </ServiceInfo>
-            </ServiceCard>
-          ))}
-        </CardContainer>
-      )}
-    </MainContainer>
-  );
-};
-
 export default ServicesComponent;
