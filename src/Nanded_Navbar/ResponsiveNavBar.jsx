@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap
+import { Link } from "react-router-dom";
 
 // Color Scheme
 const colors = {
@@ -48,7 +49,6 @@ const DropdownItem = styled.li`
   a {
     display: block;
     padding: 0.5rem;
-
     color: ${colors.darkBlue};
     text-decoration: none;
 
@@ -70,7 +70,7 @@ const NavItem = styled.li`
 `;
 
 // Bootstrap Navbar integrated with custom hover dropdown and colors
-const ResponsiveNavBar = () => {
+const ResponsiveNavBar = ({ isAuthenticated, onLogout }) => {
   return (
     <nav className="navbar navbar-expand-sm bg-dark navbar-dark">
       <div className="container-fluid">
@@ -92,77 +92,83 @@ const ResponsiveNavBar = () => {
         <div className="collapse navbar-collapse" id="collapsibleNavbar">
           {/* Navigation Links */}
           <ul className="navbar-nav">
+            {/* Home Link (Always visible) */}
             <NavItem className="nav-item">
               <NavLink className="nav-link" href="/">
                 Home
               </NavLink>
             </NavItem>
 
-            {/* Dropdown for Services */}
-            <NavItem className="nav-item dropdown">
-              <NavLink className="nav-link" href="/services">
-                Services
-              </NavLink>
-              <Dropdown className="dropdown-menu">
-                <DropdownItem>
-                  <NavLink href="#">Health & Wellness</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Education</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Business Services</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Home Services</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Emergency Services</NavLink>
-                </DropdownItem>
-              </Dropdown>
-            </NavItem>
+            {/* Conditionally render these items only if authenticated */}
+            {isAuthenticated && (
+              <>
+                {/* Dropdown for Services */}
+                <NavItem className="nav-item dropdown">
+                  <NavLink className="nav-link" href="/services">
+                    Services
+                  </NavLink>
+                  <Dropdown className="dropdown-menu">
+                    <DropdownItem>
+                      <NavLink href="#">Health & Wellness</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Education</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Business Services</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Home Services</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Emergency Services</NavLink>
+                    </DropdownItem>
+                  </Dropdown>
+                </NavItem>
 
-            {/* Dropdown for Tourism */}
-            <NavItem className="nav-item dropdown">
-              <NavLink className="nav-link" href="/tourism">
-                Tourism
-              </NavLink>
-              <Dropdown className="dropdown-menu">
-                <DropdownItem>
-                  <NavLink href="#">Tourist Spots</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Accommodation</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Food</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Restaurants</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Transport Services</NavLink>
-                </DropdownItem>
-              </Dropdown>
-            </NavItem>
+                {/* Dropdown for Tourism */}
+                <NavItem className="nav-item dropdown">
+                  <NavLink className="nav-link" href="/tourism">
+                    Tourism
+                  </NavLink>
+                  <Dropdown className="dropdown-menu">
+                    <DropdownItem>
+                      <NavLink href="#">Tourist Spots</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Accommodation</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Food</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Restaurants</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Transport Services</NavLink>
+                    </DropdownItem>
+                  </Dropdown>
+                </NavItem>
 
-            {/* Dropdown for Government Info */}
-            <NavItem className="nav-item dropdown">
-              <NavLink className="nav-link" href="/government-info">
-                Government Info
-              </NavLink>
-              <Dropdown className="dropdown-menu">
-                <DropdownItem>
-                  <NavLink href="#">Municipal Services</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Forms & Documents</NavLink>
-                </DropdownItem>
-                <DropdownItem>
-                  <NavLink href="#">Govt Links</NavLink>
-                </DropdownItem>
-              </Dropdown>
-            </NavItem>
+                {/* Dropdown for Government Info */}
+                <NavItem className="nav-item dropdown">
+                  <NavLink className="nav-link" href="/government-info">
+                    Government Info
+                  </NavLink>
+                  <Dropdown className="dropdown-menu">
+                    <DropdownItem>
+                      <NavLink href="#">Municipal Services</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Forms & Documents</NavLink>
+                    </DropdownItem>
+                    <DropdownItem>
+                      <NavLink href="#">Govt Links</NavLink>
+                    </DropdownItem>
+                  </Dropdown>
+                </NavItem>
+              </>
+            )}
           </ul>
 
           {/* Search Input and Buttons */}
@@ -179,14 +185,44 @@ const ResponsiveNavBar = () => {
                 borderRadius: "4px",
               }}
             />
-            <button className="btn btn-outline-light ms-2" type="button">
-              Login
-            </button>
+            {isAuthenticated ? (
+              <ButtonLink
+                to="/"
+                onClick={onLogout}
+                className="btn btn-outline-light ms-2"
+              >
+                Sign Out
+              </ButtonLink>
+            ) : (
+              <ButtonLink to="/signin" className="btn btn-outline-light ms-2">
+                Sign In
+              </ButtonLink>
+            )}
           </form>
         </div>
       </div>
     </nav>
   );
 };
+
+const ButtonLink = styled(Link)`
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #fff;
+  background-color: #007bff;
+  border: 1px solid #007bff;
+  border-radius: 0.25rem;
+  text-align: center;
+  text-decoration: none;
+  transition: background-color 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    background-color: #0056b3;
+    border-color: #004085;
+    text-decoration: none;
+  }
+`;
 
 export default ResponsiveNavBar;
