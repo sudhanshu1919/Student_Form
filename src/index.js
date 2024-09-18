@@ -7,8 +7,11 @@ import ReactDOM from "react-dom/client";
 // import App from "./Redux/App";
 // import App from "./Data/App";
 // import App from "./Nanded/App";
-import App from "./Nanded_Navbar/App";
+// import App from "./Nanded_Navbar/App";
+import App from "./Passport/App";
 import reportWebVitals from "./reportWebVitals";
+import "bootstrap/dist/css/bootstrap.min.css";
+
 // it is Boostrap
 import "bootstrap/dist/css/bootstrap.min.css"; // Import Bootstrap CSS
 import "bootstrap/dist/js/bootstrap.bundle.min"; // Import Bootstrap JS
