@@ -1,0 +1,9 @@
+mkdir server
+cd server
+npm init -y
+npm install express mongoose dotenv cors body-parser
+
+
+This is Fresh Passport and Re-issue Passport Normal fee: Rs: 2000/- ( Passport will be processed and delivered within 30 days after your appointment.)
+
+Tatkal Passport Fee: Rs: 5000/- ( Passport will be processed and delivered within 5 days after your appointment.)

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import styled from "styled-components";
 import Qrimg from "../assets/Sudhanshu Portfolio .jpg";
 import { useNavigate } from "react-router-dom";
@@ -33,8 +33,8 @@ const Heading = styled.h1`
 const CompanyName = styled.h2`
   font-size: 1.5rem;
   margin-bottom: 2rem;
-  font-family: "Roboto", sans-serif; /* Professional font-family */
-  color: #007bff; /* Brand color for the company name */
+  font-family: "Roboto", sans-serif;
+  color: #007bff;
 
   @media (max-width: 768px) {
     font-size: 1.2rem;
@@ -42,19 +42,19 @@ const CompanyName = styled.h2`
 `;
 
 const QRImage = styled.img`
-  width: 200px; /* Adjust width for larger screens */
-  height: 200px; /* Maintain aspect ratio */
+  width: 200px;
+  height: 200px;
   margin-bottom: 2rem;
 
   @media (max-width: 768px) {
-    width: 150px; /* Adjust width for smaller screens */
-    height: 150px; /* Maintain aspect ratio */
+    width: 150px;
+    height: 150px;
   }
 `;
 
 const Instructions = styled.p`
   font-size: 1.25rem;
-  font-family: "Roboto", sans-serif; /* Professional font-family */
+  font-family: "Roboto", sans-serif;
   margin-bottom: 2rem;
 
   @media (max-width: 768px) {
@@ -65,7 +65,7 @@ const Instructions = styled.p`
 const FeeDetails = styled.div`
   font-size: 1rem;
   margin-bottom: 2rem;
-  font-family: "Roboto", sans-serif; /* Professional font-family */
+  font-family: "Roboto", sans-serif;
   color: #495057;
 
   @media (max-width: 768px) {
@@ -74,7 +74,7 @@ const FeeDetails = styled.div`
 `;
 
 const FeeText = styled.p`
-  background-color: #e9ecef; /* Light gray background */
+  background-color: #e9ecef;
   padding: 0.5rem;
   border-radius: 5px;
   margin: 0.5rem 0;
@@ -100,9 +100,49 @@ const Button = styled.button`
   }
 `;
 
-// Main Component
+const FileInput = styled.input`
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+`;
+
+const Label = styled.label`
+  margin-bottom: 0.5rem;
+  font-weight: bold;
+`;
+
 const PaymentPage = () => {
   const navigate = useNavigate();
+  const [file, setFile] = useState(null);
+
+  const handleFileChange = (e) => {
+    setFile(e.target.files[0]); // Capture the uploaded file
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    if (file) {
+      const formData = new FormData();
+      formData.append("paymentReceipt", file);
+
+      // Log to the console (simulating sending data)
+      console.log("Uploading receipt:", file.name);
+
+      // Here, you'd send the formData to the server
+      // Example (uncomment to use):
+      // fetch('/upload-receipt', {
+      //   method: 'POST',
+      //   body: formData,
+      // }).then(response => response.json())
+      // .then(data => {
+      //   console.log("Server response:", data);
+      // });
+
+      alert("Payment receipt uploaded successfully!");
+    } else {
+      alert("Please upload a receipt.");
+    }
+  };
 
   const handleGoBack = () => {
     navigate(-1); // Navigate back to the previous page
@@ -112,16 +152,28 @@ const PaymentPage = () => {
     <Container>
       <Heading>Payment Page</Heading>
       <CompanyName>Your Company Name</CompanyName>
-      <QRImage
-        src={Qrimg} // Replace with your QR code image URL
-        alt="PhonePay QR Code"
-      />
+      <QRImage src={Qrimg} alt="PhonePay QR Code" />
       <Instructions>
         Scan the QR code with the PhonePay app to complete your payment.
       </Instructions>
+      {/* File Upload */}
+      <div>
+        <Label htmlFor="paymentReceipt">
+          Upload Payment Receipt (PhonePay, Google Pay, Paytm):
+        </Label>
+        <FileInput
+          type="file"
+          id="paymentReceipt"
+          accept=".jpg,.jpeg,.png,.pdf" // File types
+          onChange={handleFileChange}
+        />
+
+        {/* Submit Button */}
+        <Button onClick={handleSubmit}>Submit</Button>
+      </div>
       <FeeDetails>
         <FeeText>
-          This is Fresh Passport and Re-issue Passport Normal fee:{" "}
+          Fresh Passport and Re-issue Passport Normal Fee:{" "}
           <span
             style={{
               background: "#02BC7D",
@@ -130,13 +182,11 @@ const PaymentPage = () => {
               borderRadius: "5px",
             }}
           >
-            {" "}
             <b> Rs: 2000/- </b>
           </span>{" "}
           ( Passport will be processed and delivered within 30 days after your
-          appointment.){" "}
+          appointment.)
         </FeeText>
-
         <FeeText>
           Tatkal Passport Fee:{" "}
           <span
@@ -147,14 +197,12 @@ const PaymentPage = () => {
               borderRadius: "5px",
             }}
           >
-            {" "}
             <b> Rs: 5000/- </b>
           </span>{" "}
           ( Passport will be processed and delivered within 5 days after your
           appointment.)
         </FeeText>
       </FeeDetails>
-      <Button onClick={handleGoBack}>Go Back</Button>
     </Container>
   );
 };
