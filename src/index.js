@@ -8,7 +8,7 @@ import ReactDOM from "react-dom/client";
 // import App from "./Data/App";
 // import App from "./Nanded/App";
 // import App from "./Nanded_Navbar/App";
-import App from "./Passport/App";
+import App from "./App";
 
 import reportWebVitals from "./reportWebVitals";
 import "bootstrap/dist/css/bootstrap.min.css";
