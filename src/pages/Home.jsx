@@ -4,6 +4,7 @@ import Display from "../component/Display";
 function Home() {
   return (
     <>
+      <h1>This is a home Page of Student Information </h1>
       <Account />
       <Display />
     </>

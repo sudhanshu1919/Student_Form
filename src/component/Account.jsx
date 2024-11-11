@@ -55,7 +55,8 @@ function Account() {
   return (
     <Wrapper>
       <Card>
-        <h2>Account</h2>
+        <h2>Student Infromation</h2>
+        <p>All infromation must be required..!</p>
         <Form onSubmit={handleSubmit}>
           <FormTable>
             <tbody>
